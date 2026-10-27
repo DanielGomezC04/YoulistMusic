@@ -12,3 +12,7 @@ generos_csv = CSVStorage(
     "generos.csv",
     ["nombre", "descripcion"]
 )
+usuarios_csv = CSVStorage(
+    "usuarios.csv",
+    ["nombre", "correo"]
+)
