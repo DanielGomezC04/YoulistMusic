@@ -15,4 +15,9 @@ generos_csv = CSVStorage(
 usuarios_csv = CSVStorage(
     "usuarios.csv",
     ["nombre", "correo"]
+
+)
+playlists_csv = CSVStorage(
+    "playlists.csv",
+    ["nombre", "descripcion", "usuario_id"]
 )
