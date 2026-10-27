@@ -1,8 +1,11 @@
 from fastapi import FastAPI
-from routers import artista, cancion
+from routers import artista, cancion, genero
 
 app = FastAPI(
 )
+@app.get("/")
+def inicio():
+    return {"mensaje": "Bienvenido a YoulistMusic"}
 
 app.include_router(
     artista.router,
@@ -16,7 +19,10 @@ app.include_router(
     tags=["Canciones"]
 )
 
+app.include_router(
+    genero.router,
+    prefix="/generos",
+    tags=["Géneros"]
+)
 
-@app.get("/")
-def inicio():
-    return {"mensaje": "Bienvenido a Spotlist"}
+
