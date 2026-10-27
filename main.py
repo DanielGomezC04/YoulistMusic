@@ -1,11 +1,11 @@
 from fastapi import FastAPI
-from routers import artistas
+from routers import artista
 
 app = FastAPI(
 )
 
 app.include_router(
-    artistas.router,
+    artista.router,
     prefix="/artistas",
     tags=["Artistas"]
 )
