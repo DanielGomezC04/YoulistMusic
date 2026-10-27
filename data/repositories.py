@@ -8,3 +8,7 @@ canciones_csv = CSVStorage(
     "canciones.csv",
     ["titulo", "duracion", "portada_url"]
 )
+generos_csv = CSVStorage(
+    "generos.csv",
+    ["nombre", "descripcion"]
+)
