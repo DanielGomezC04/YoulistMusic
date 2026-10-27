@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class PlaylistBase(BaseModel):
@@ -10,3 +10,8 @@ class PlaylistBase(BaseModel):
 
 class PlaylistID(PlaylistBase):
     id: int
+
+
+class PlaylistActualizar(BaseModel):
+    nombre: Optional[str] = None
+    descripcion: Optional[str] = None
