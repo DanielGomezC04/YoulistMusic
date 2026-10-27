@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import artista, cancion, genero, usuario
+from routers import artista, cancion, genero, usuario, playlist
 
 app = FastAPI(
 )
@@ -30,5 +30,9 @@ app.include_router(
     prefix="/generos",
     tags=["Géneros"]
 )
-
+app.include_router(
+    playlist.router,
+    prefix="/playlists",
+    tags=["Playlists"]
+)
 
