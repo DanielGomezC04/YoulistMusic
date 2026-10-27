@@ -1,11 +1,17 @@
 from fastapi import FastAPI
-from routers import artista, cancion, genero
+from routers import artista, cancion, genero, usuario
 
 app = FastAPI(
 )
 @app.get("/")
 def inicio():
     return {"mensaje": "Bienvenido a YoulistMusic"}
+
+app.include_router(
+    usuario.router,
+    prefix="/usuarios",
+    tags=["Usuarios"]
+)
 
 app.include_router(
     artista.router,
