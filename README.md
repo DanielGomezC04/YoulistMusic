@@ -1,5 +1,9 @@
 YoulistMusic 🎵
 
+Objetivo del proyecto
+
+El objetivo de YoulistMusic es desarrollar una API que permita a los usuarios organizar su música favorita, registrando artistas, canciones, géneros musicales y listas de reproducción personalizadas. El proyecto busca facilitar la gestión de esta información mediante operaciones para crear, consultar, actualizar y eliminar registros, almacenando los datos en archivos CSV.
+
 Este proyecto es una API para organizar música. Permite registrar artistas, canciones, géneros, usuarios y playlists para que cada usuario pueda crear sus propias listas de reproducción.
 
 Diagrama de modelos
