@@ -30,21 +30,22 @@ def mostrar_artistas():
     return artistas_csv.obtener_todos()
 
 
-@router.get(
-    "/{id}",
-    status_code=status.HTTP_200_OK,
-    response_model=ArtistaID
-)
-def mostrar_artista(id: int):
-    artista = artistas_csv.obtener_por_id(id)
+@router.get("/buscar/{nombre}")
+def buscar_artista_por_nombre(nombre: str):
+    artistas = artistas_csv.obtener_todos()
 
-    if not artista:
+    resultados = [
+        artista for artista in artistas
+        if nombre.lower() in artista["nombre"].lower()
+    ]
+
+    if not resultados:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Artista no encontrado"
+            detail="No se encontraron artistas con ese nombre"
         )
 
-    return artista
+    return resultados
 
 
 @router.patch(
