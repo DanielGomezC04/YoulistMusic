@@ -76,6 +76,16 @@ La API de YoulistMusic cuenta con endpoints para gestionar artistas, canciones, 
 | PATCH | `/playlists/{id}` | Actualizar una lista |
 | DELETE | `/playlists/{id}` | Eliminar una lista |
 
+### inicio en visual
+
+-it clone https://github.com/DanielGomezC04/YoulistMusic.git
+-python -m venv .venv
+-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+-.\.venv\Scripts\Activate.ps1
+-python -m pip install -r requirements.txt
+-python.exe -m pip install --upgrade pip
+-python -m uvicorn main:app --reload
+
 Las canciones pueden tener varios artistas y géneros, y una playlist puede contener varias canciones. Un usuario puede crear varias playlists.
 
 La información se guarda en archivos CSV y la API se desarrolla con Python y FastAPI.
