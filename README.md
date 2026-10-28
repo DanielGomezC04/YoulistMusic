@@ -22,17 +22,59 @@ Cancion -------- Artista
    v
  Genero
 
-Modelos
+## Mapa de Endpoints
 
-Usuario: nombre y correo.
+La API de YoulistMusic cuenta con endpoints para gestionar artistas, canciones, géneros musicales, usuarios y listas de reproducción. A través de estas rutas se pueden crear, consultar, actualizar y eliminar registros.
 
-Playlist: nombre, descripción y usuario al que pertenece.
+### Artistas
 
-Canción: título, duración y portada.
+| Método | Endpoint | Descripción |
+|---|---|---|
+| POST | `/artistas/` | Crear un artista |
+| GET | `/artistas/` | Consultar todos los artistas |
+| GET | `/artistas/{id}` | Consultar un artista por ID |
+| PATCH | `/artistas/{id}` | Actualizar un artista |
+| DELETE | `/artistas/{id}` | Eliminar un artista |
 
-Artista: nombre, biografía e imagen.
+### Canciones
 
-Género: nombre y descripción.
+| Método | Endpoint | Descripción |
+|---|---|---|
+| POST | `/canciones/` | Crear una canción |
+| GET | `/canciones/` | Consultar todas las canciones |
+| GET | `/canciones/{id}` | Consultar una canción por ID |
+| PATCH | `/canciones/{id}` | Actualizar una canción |
+| DELETE | `/canciones/{id}` | Eliminar una canción |
+
+### Géneros
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| POST | `/generos/` | Crear un género |
+| GET | `/generos/` | Consultar todos los géneros |
+| GET | `/generos/{id}` | Consultar un género por ID |
+| PATCH | `/generos/{id}` | Actualizar un género |
+| DELETE | `/generos/{id}` | Eliminar un género |
+
+### Usuarios
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| POST | `/usuarios/` | Crear un usuario |
+| GET | `/usuarios/` | Consultar usuarios activos |
+| GET | `/usuarios/{id}` | Consultar un usuario por ID |
+| PATCH | `/usuarios/{id}` | Actualizar un usuario |
+| DELETE | `/usuarios/{id}` | Desactivar un usuario y conservar su registro histórico |
+
+### Listas de reproducción
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| POST | `/playlists/` | Crear una lista de reproducción |
+| GET | `/playlists/` | Consultar todas las listas |
+| GET | `/playlists/{id}` | Consultar una lista por ID |
+| PATCH | `/playlists/{id}` | Actualizar una lista |
+| DELETE | `/playlists/{id}` | Eliminar una lista |
 
 Las canciones pueden tener varios artistas y géneros, y una playlist puede contener varias canciones. Un usuario puede crear varias playlists.
 
