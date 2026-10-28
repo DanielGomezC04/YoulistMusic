@@ -78,13 +78,13 @@ La API de YoulistMusic cuenta con endpoints para gestionar artistas, canciones, 
 
 ### inicio en visual
 
--it clone https://github.com/DanielGomezC04/YoulistMusic.git
--python -m venv .venv
--Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
--.\.venv\Scripts\Activate.ps1
--python -m pip install -r requirements.txt
--python.exe -m pip install --upgrade pip
--python -m uvicorn main:app --reload
+1.it clone https://github.com/DanielGomezC04/YoulistMusic.git
+2.python -m venv .venv
+3.Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+4. .\.venv\Scripts\Activate.ps1
+5. python -m pip install -r requirements.txt
+6. python.exe -m pip install --upgrade pip
+7. python -m uvicorn main:app --reload
 
 Las canciones pueden tener varios artistas y géneros, y una playlist puede contener varias canciones. Un usuario puede crear varias playlists.
 
