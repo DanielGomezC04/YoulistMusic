@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter, status, HTTPException
 from data.repositories import usuarios_csv
 from models.usuario import (
@@ -11,7 +10,7 @@ router = APIRouter()
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED,
-             response_model=UsuarioID)
+              response_model=UsuarioID)
 def crear_usuario(nuevo_usuario: UsuarioBase):
     datos = nuevo_usuario.model_dump(mode="json")
     return usuarios_csv.crear(datos)
@@ -19,16 +18,20 @@ def crear_usuario(nuevo_usuario: UsuarioBase):
 
 @router.get("/", response_model=list[UsuarioID])
 def mostrar_usuarios():
-    return usuarios_csv.obtener_todos()
+    usuarios = usuarios_csv.obtener_todos()
+    return [
+        usuario for usuario in usuarios
+        if usuario.get("estado", "activo") == "activo"
+    ]
 
 
 @router.get("/{id}", response_model=UsuarioID)
 def mostrar_usuario(id: int):
     usuario = usuarios_csv.obtener_por_id(id)
 
-    if not usuario:
+    if not usuario or usuario.get("estado", "activo") == "inactivo":
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="Usuario no encontrado"
         )
 
@@ -37,6 +40,14 @@ def mostrar_usuario(id: int):
 
 @router.patch("/{id}", response_model=UsuarioID)
 def actualizar_usuario(id: int, datos: UsuarioActualizar):
+    usuario_existente = usuarios_csv.obtener_por_id(id)
+
+    if not usuario_existente or usuario_existente.get("estado", "activo") == "inactivo":
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Usuario no encontrado"
+        )
+
     cambios = datos.model_dump(
         mode="json",
         exclude_unset=True,
@@ -44,24 +55,23 @@ def actualizar_usuario(id: int, datos: UsuarioActualizar):
     )
 
     usuario = usuarios_csv.actualizar(id, cambios)
-
-    if not usuario:
-        raise HTTPException(
-            status_code=404,
-            detail="Usuario no encontrado"
-        )
-
     return usuario
 
 
-@router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{id}", status_code=status.HTTP_200_OK)
 def eliminar_usuario(id: int):
-    eliminado = usuarios_csv.eliminar(id)
+    usuario = usuarios_csv.obtener_por_id(id)
 
-    if not eliminado:
+    if not usuario or usuario.get("estado", "activo") == "inactivo":
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="Usuario no encontrado"
         )
 
-    return None
+    usuarios_csv.actualizar(id, {"estado": "inactivo"})
+
+    return {
+        "mensaje": "Usuario desactivado correctamente",
+        "id": id,
+        "estado": "inactivo"
+    }
